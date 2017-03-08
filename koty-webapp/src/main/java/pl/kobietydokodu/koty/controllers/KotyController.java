@@ -18,16 +18,17 @@ import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.domain.KotDAO;
 import pl.kobietydokodu.koty.domain.KotDaoJpa;
 import pl.kobietydokodu.koty.dto.KotDTO;
+import pl.kobietydokodu.koty.services.DaoService;
 
 @Controller
 public class KotyController {
 
 	@Autowired
-	KotDaoJpa dao;
+	DaoService daoService;
 	
 	@RequestMapping("/lista")
 	public String listaKotow(Model model) {
-		model.addAttribute("koty", dao.findAll());
+		model.addAttribute("koty", daoService.dao.findAll());
 		return "lista";
 	}
 	
@@ -45,7 +46,7 @@ public class KotyController {
 			kot.setImie(kotDto.getImie());
 			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
 			kot.setWaga(kotDto.getWaga());
-			dao.save(kot);
+			daoService.dao.save(kot);
 			return "redirect:/lista";
 		}
 		return "dodaj";
@@ -53,7 +54,7 @@ public class KotyController {
 	
 	@RequestMapping("/kot-{imie}")
 	public String szczegolyKota(@PathVariable("imie") String imie, Model model) {
-		model.addAttribute("kot", dao.findByImie(imie));
+		model.addAttribute("kot", daoService.dao.findByImie(imie));
 		return "szczegoly";
 	}
 	
