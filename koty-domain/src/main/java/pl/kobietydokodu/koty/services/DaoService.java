@@ -3,12 +3,16 @@ package pl.kobietydokodu.koty.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.kobietydokodu.koty.domain.KotDaoJpa;
+import pl.kobietydokodu.koty.domain.KotDao;
+import pl.kobietydokodu.koty.domain.ZabawkaDAO;
 
 @Service
 public class DaoService {
 	
 	@Autowired
-	public KotDaoJpa dao;
+	public KotDao kotDao;
+	
+	@Autowired
+	public ZabawkaDAO zabawkaDao;
 
 }
