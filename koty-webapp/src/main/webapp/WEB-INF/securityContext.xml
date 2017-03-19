@@ -9,10 +9,10 @@ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
    	<http auto-config="true" use-expressions="true">
     <form-login login-page="/"
         default-target-url="/lista"
-        authentication-failure-url="/login?error=1"
+        authentication-failure-url="/"
         username-parameter="email"
         password-parameter="password" />
-    <logout logout-success-url="/home" /> <!-- określamy przekierowanie po wylogowaniu -->
+    <logout logout-success-url="/" /> <!-- określamy przekierowanie po wylogowaniu -->
     <csrf /> <!-- włączamy zabezpieczenie przed csrf -->
 </http>
 
