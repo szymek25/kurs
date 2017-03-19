@@ -19,7 +19,7 @@
 				<c:forEach items="${koty}" var="kot" varStatus="status">
 				<tr>
 					<td>${status.index}</td>
-					<td><a href="<c:url value="kot-${status.index}" />">${kot.imie}</a></td>
+					<td><a href="<c:url value="kot-${kot.imie}" />">${kot.imie}</a></td>
 				</tr>
 				</c:forEach>
 			</tbody>
