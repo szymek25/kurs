@@ -24,6 +24,12 @@ public class KotyController {
 	@Autowired
 	DaoService dao;
 	
+	@RequestMapping("/")
+	public String login(Model model) {
+		
+		return "login";
+	}
+	
 	@RequestMapping("/lista")
 	public String listaKotow(Model model) {
 		model.addAttribute("koty", dao.kotDao.findAll());
