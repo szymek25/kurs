@@ -33,12 +33,7 @@
         <value>.jsp</value>
     </property>
 	</bean>
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://localhost:3306/koty" />
-    <property name="username" value="pawel" />
-    <property name="password" value="pawel" />
-	</bean>
+
 	
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"></bean>
 <bean id="entityManagerFactory"
