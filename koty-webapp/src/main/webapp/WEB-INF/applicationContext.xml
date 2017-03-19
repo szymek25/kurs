@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:security="http://www.springframework.org/schema/security"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:mvc="http://www.springframework.org/schema/mvc"
  xmlns:context="http://www.springframework.org/schema/context"
  xsi:schemaLocation="
@@ -10,7 +11,9 @@
  http://www.springframework.org/schema/context 
  http://www.springframework.org/schema/context/spring-context-4.0.xsd
  http://www.springframework.org/schema/data/jpa
- http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+ http://www.springframework.org/schema/security
+ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
     <context:component-scan base-package="pl.kobietydokodu" /> <!-- Chcemy automatycznie obslugiwali wszystkie klasy z adnotacjami w tym pakiecie -->
     <context:annotation-config /> <!-- To na przyszlosc, pozwoli nam korzystac z adnotacji takie w klasach, ktore bysmy skonfigurowali recznie -->
@@ -52,5 +55,5 @@
         </props>
     </property>
 </bean> 
-
+<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 </beans>

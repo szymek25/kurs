@@ -23,7 +23,7 @@ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
    users-by-username-query=
      "SELECT username, password, enabled FROM users WHERE username=?"
    authorities-by-username-query=
-     "SELECT username, ROLE_USER FROM users WHERE username =?  " />
+     "SELECT username, 'ROLE_USER' FROM users WHERE username =?  " />
    </authentication-provider>
  </authentication-manager>
     

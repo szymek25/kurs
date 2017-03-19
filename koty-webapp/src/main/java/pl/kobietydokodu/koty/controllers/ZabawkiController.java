@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ public class ZabawkiController {
 	@Autowired
 	DaoService dao;
 	
+	@Secured({ "ROLE_USER" })
 	@RequestMapping("/kot-{imie}/dodajZabawke")
 	public String dodajZabawke(HttpServletRequest request,  @ModelAttribute("zabawkaDto") @Valid ZabawkaDTO zabawkaDto, BindingResult result, @PathVariable("imie") String imie, Model model) {
 		model.addAttribute("kot", dao.kotDao.findByImie(imie));
@@ -38,6 +40,7 @@ public class ZabawkiController {
 		return "dodajZabawke";
 		}
 	
+	@Secured({ "ROLE_USER" })
 	@RequestMapping("/kot-{imie}/usun/{zabawka}")
 	public String usuwanieZabawki(@PathVariable("imie") String imie,@PathVariable("zabawka") String zabawka, Model model) {
 		dao.zabawkaDao.delete(zabawka);;
