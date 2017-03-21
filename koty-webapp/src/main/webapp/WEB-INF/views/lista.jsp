@@ -5,17 +5,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Lista kotów</title>
+		<title><spring:message code="lista.tytulstrony" /></title>
 	</head>
 	<body>
 	<a href="/koty-webapp/lista?language=en">Angielski</a>
 	<a href="/koty-webapp/lista?language=pl">Polski</a>
-		<a href="<c:url value="dodaj" />">Dodaj kota</a><br />
+		<p><a href="<c:url value="dodaj" />"><spring:message code="lista.dodaj" /></a><br /></p>
 		<table border="1">
 			<thead>
 				<tr>
 					<th>#</th>
-					<th><spring:message code="web.lista.tytul" /></th>
+					<th><spring:message code="lista.tytul" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +29,5 @@
 		</table>
 		<br />
 		<hr />
-		Uwaga! W kontekście użycia HTML oraz sposobu budowania stron, te rozwiązania są bardziej antyprzykładem niż materiałem do nauki!<br />
-		Jeśli chciałabyś także tworzyć same widoki i pisac poprawny, dobrze skonstruowany kod HTML, zachęcamy do zapoznania się np. z frameworkiem <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
 	</body>
 </html>
