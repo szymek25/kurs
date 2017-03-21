@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -7,12 +8,14 @@
 		<title>Lista kotów</title>
 	</head>
 	<body>
+	<a href="/koty-webapp/lista?language=en">Angielski</a>
+	<a href="/koty-webapp/lista?language=pl">Polski</a>
 		<a href="<c:url value="dodaj" />">Dodaj kota</a><br />
 		<table border="1">
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Imie kota</th>
+					<th><spring:message code="web.lista.tytul" /></th>
 				</tr>
 			</thead>
 			<tbody>

@@ -54,6 +54,20 @@
             <prop key="hibernate.hbm2ddl.auto">update</prop>
         </props>
     </property>
+</bean>
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value="i18n/messages"></property>
+</bean>
+
+<mvc:interceptors>
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="language" />
+    </bean>
+</mvc:interceptors>
+
+<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="defaultLocale" value="en" />
 </bean> 
 <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 </beans>
