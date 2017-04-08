@@ -16,6 +16,10 @@ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
     <csrf /> <!-- włączamy zabezpieczenie przed csrf -->
 </http>
 
+	<beans:bean id="filterMultipartResolver"
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value="10000000" />
+	</beans:bean>
 
 <authentication-manager>
    <authentication-provider>
@@ -34,4 +38,5 @@ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
     <beans:property name="password" value="pawel" />
 	</beans:bean>
 
+	
 </beans:beans>
