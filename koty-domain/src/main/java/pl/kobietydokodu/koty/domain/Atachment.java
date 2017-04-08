@@ -27,8 +27,9 @@ public class Atachment {
 	public long getSize() {
 		return size;
 	}
-	public void setSize(long size) {
-		this.size = size;
+	public void setSize(long bs) {
+		this.size = bs;
 	}
+	
 
 }

@@ -3,6 +3,7 @@ package pl.kobietydokodu.koty.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-
+import org.apache.commons.fileupload.MultipartStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import pl.kobietydokodu.koty.domain.Atachment;
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
 import pl.kobietydokodu.koty.services.DaoService;
@@ -83,6 +85,15 @@ public class KotyController {
 	                        new BufferedOutputStream(new FileOutputStream(fsFile));
 	            stream.write(bytes);
 	            stream.close();
+
+	            
+	            Atachment atachment = new Atachment();
+	            atachment.setUuid(filename);
+	            atachment.setOrginalName(file.getOriginalFilename());
+	            atachment.setSize(file.getSize());
+
+	            
+	            dao.atachmentDao.save(atachment);
 
 	            log.info("File {} has been successfully uploaded as {}");
 	        } catch (Exception e) {
