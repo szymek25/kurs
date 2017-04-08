@@ -13,7 +13,7 @@ http://www.springframework.org/schema/security/spring-security-4.2.xsd">
         username-parameter="email"
         password-parameter="password" />
     <logout logout-success-url="/" /> <!-- określamy przekierowanie po wylogowaniu -->
-    <csrf /> <!-- włączamy zabezpieczenie przed csrf -->
+   <csrf /> <!-- włączamy zabezpieczenie przed csrf --> 
 </http>
 
 	<beans:bean id="filterMultipartResolver"

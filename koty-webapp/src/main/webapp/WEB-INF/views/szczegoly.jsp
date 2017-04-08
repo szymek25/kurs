@@ -38,6 +38,13 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+			<form action="/koty-webapp/upload" enctype="multipart/form-data" method="post">
+    			<input type="file" name="plik" />
+    			<input type="text" name="opis" />
+    			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+    			<input type=submit name="wyslij" value="Wyslij"/>
+			</form>
 <a href="kot-${kot.imie}/dodajZabawke">Dodaj zabawke</a>
 </body>
 </html>
