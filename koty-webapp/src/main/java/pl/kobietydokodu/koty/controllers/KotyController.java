@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.kobietydokodu.koty.domain.Photo;
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
+import pl.kobietydokodu.koty.dto.ZabawkaDTO;
 import pl.kobietydokodu.koty.services.DaoService;
 
 @Controller
@@ -72,8 +73,8 @@ public class KotyController {
 	
 	final Logger log = Logger.getLogger(getClass().getName());
 	
-	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("plik") MultipartFile file){
+	@RequestMapping(value="/kot-{imie}/upload", method=RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("plik") MultipartFile file,@PathVariable("imie") String imie, Model model){
 	    if (!file.isEmpty()) {
 	        try {
 	            UUID uuid = UUID.randomUUID();
@@ -86,12 +87,15 @@ public class KotyController {
 	            stream.write(bytes);
 	            stream.close();
 
+	            Kot kot = new Kot();
+	            kot = dao.kotDao.findByImie(imie);
 	            
 	            Photo atachment = new Photo();
 	            atachment.setUuid(filename);
 	            atachment.setOrginalName(file.getOriginalFilename());
 	            atachment.setSize(file.getSize());
-
+	            atachment.setKot(kot);
+	            
 	            
 	            dao.atachmentDao.save(atachment);
 
@@ -105,4 +109,11 @@ public class KotyController {
 	    return "redirect:/lista";
 	}
 	
+	@Secured({ "ROLE_USER" })
+	@RequestMapping("/kot-{imie}/dodajZdjecie")
+	public String dodajZdjecie(HttpServletRequest request,  @ModelAttribute("kot")  @PathVariable("imie") String imie, Model model){
+		model.addAttribute(dao.kotDao.findByImie(imie));
+		
+		return "dodajZdjecie";
+	}
 }
