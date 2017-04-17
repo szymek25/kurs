@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import pl.kobietydokodu.koty.domain.Atachment;
+import pl.kobietydokodu.koty.domain.Photo;
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
 import pl.kobietydokodu.koty.services.DaoService;
@@ -87,7 +87,7 @@ public class KotyController {
 	            stream.close();
 
 	            
-	            Atachment atachment = new Atachment();
+	            Photo atachment = new Photo();
 	            atachment.setUuid(filename);
 	            atachment.setOrginalName(file.getOriginalFilename());
 	            atachment.setSize(file.getSize());

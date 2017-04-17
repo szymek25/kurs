@@ -4,12 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Atachment {
+public class Photo {
 	
 	@Id
 	private String orginalName;
 	private String uuid;
 	private long size;
+	
 	
 	
 	public String getOrginalName() {
