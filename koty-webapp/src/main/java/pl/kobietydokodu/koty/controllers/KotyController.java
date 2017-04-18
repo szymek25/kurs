@@ -2,14 +2,18 @@ package pl.kobietydokodu.koty.controllers;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.fileupload.MultipartStream;
@@ -90,10 +94,15 @@ public class KotyController {
 	            Kot kot = new Kot();
 	            kot = dao.kotDao.findByImie(imie);
 	            
-	            Photo atachment = new Photo();
+	            Photo atachment = dao.atachmentDao.findBykot_imie(imie);
+	            dao.atachmentDao.delete(atachment);
+	            atachment = new Photo();
+	            
 	            atachment.setUuid(filename);
 	            atachment.setOrginalName(file.getOriginalFilename());
 	            atachment.setSize(file.getSize());
+	            atachment.setByteSize(file.getBytes());
+	            atachment.setMimeType(file.getContentType());
 	            atachment.setKot(kot);
 	            
 	            
@@ -115,5 +124,33 @@ public class KotyController {
 		model.addAttribute(dao.kotDao.findByImie(imie));
 		
 		return "dodajZdjecie";
+	}
+	
+	@RequestMapping(value = "/kot-{imie}/pobierzZdjecie",method = RequestMethod.GET)
+	public void pobierz(@PathVariable("imie") String imie,
+	        HttpServletResponse response) throws IOException {
+
+	    Photo attachment = new Photo();
+	    attachment = dao.atachmentDao.findBykot_imie(imie);
+	    FileInputStream inputStream = new FileInputStream(attachment.getUuid());
+
+	    System.out.println(attachment.getOrginalName());
+	    response.setContentType(attachment.getMimeType());
+	    response.setContentLength((int) attachment.getSize());
+
+	    String headerValue = String.format("attachment; filename=\"%s\"",
+	                attachment.getOrginalName());
+	    response.setHeader("Content-Disposition", headerValue);
+
+	    OutputStream outStream = response.getOutputStream();
+
+	    byte[] buffer = attachment.getByteSize();
+	    int bytesRead = -1;
+	    // czytamy w pętli po fragmencie, który następnie przepisujemy do strumienia wyjściowego
+	    while ((bytesRead = inputStream.read(buffer)) != -1) {
+	        outStream.write(buffer, 0, bytesRead);
+	    }
+	    inputStream.close();
+	    outStream.close(); 
 	}
 }

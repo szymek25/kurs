@@ -42,5 +42,6 @@
 			
 <a href="kot-${kot.imie}/dodajZabawke">Dodaj zabawke</a>
 <a href="kot-${kot.imie}/dodajZdjecie">Dodaj/Zmien zdjecie</a>
+<img source = "kot-${kot.imie}/pobierzZdjecie">
 </body>
 </html>

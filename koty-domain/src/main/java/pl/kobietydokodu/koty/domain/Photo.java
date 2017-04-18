@@ -12,6 +12,8 @@ public class Photo {
 	private String orginalName;
 	private String uuid;
 	private long size;
+	private byte[] byteSize;
+	private String mimeType;
 	@OneToOne
 	private Kot kot;
 	
@@ -39,6 +41,18 @@ public class Photo {
 	}
 	public void setKot(Kot kot) {
 		this.kot = kot;
+	}
+	public byte[] getByteSize() {
+		return byteSize;
+	}
+	public void setByteSize(byte[] byteSize) {
+		this.byteSize = byteSize;
+	}
+	public String getMimeType() {
+		return mimeType;
+	}
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
 	}
 
 
