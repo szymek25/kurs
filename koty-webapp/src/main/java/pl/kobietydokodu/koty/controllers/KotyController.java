@@ -80,6 +80,14 @@ public class KotyController {
 	@RequestMapping(value="/kot-{imie}/upload", method=RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("plik") MultipartFile file,@PathVariable("imie") String imie, Model model){
 	    if (!file.isEmpty()) {
+	    	try{
+	    	//Usuwanie starego zdjecia
+	    	Photo atachmentold = dao.atachmentDao.findBykot_imie(imie);
+	    	dao.atachmentDao.delete(atachmentold);
+	    	}
+	    	catch (Exception e) {
+	    		log.info("Nothing to delete");
+	    	}
 	        try {
 	            UUID uuid = UUID.randomUUID();
 	            String filename = "/home/pawel/uploads/upload_"+uuid.toString();
@@ -94,9 +102,7 @@ public class KotyController {
 	            Kot kot = new Kot();
 	            kot = dao.kotDao.findByImie(imie);
 	            
-	            Photo atachment = dao.atachmentDao.findBykot_imie(imie);
-	            dao.atachmentDao.delete(atachment);
-	            atachment = new Photo();
+	            Photo atachment = new Photo();
 	            
 	            atachment.setUuid(filename);
 	            atachment.setOrginalName(file.getOriginalFilename());
@@ -134,7 +140,6 @@ public class KotyController {
 	    attachment = dao.atachmentDao.findBykot_imie(imie);
 	    FileInputStream inputStream = new FileInputStream(attachment.getUuid());
 
-	    System.out.println(attachment.getOrginalName());
 	    response.setContentType(attachment.getMimeType());
 	    response.setContentLength((int) attachment.getSize());
 
